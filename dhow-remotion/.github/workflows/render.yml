@@ -1,0 +1,39 @@
+name: Render video
+
+on:
+  workflow_dispatch: # dijalankan manual dari tab Actions
+  # Opsional: render otomatis setiap push ke main (menghabiskan menit Actions)
+  # push:
+  #   branches: [main]
+
+jobs:
+  render:
+    name: Render video
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    # Kalau proyek Remotion ada di subfolder repo, hapus tanda # dan sesuaikan:
+    # defaults:
+    #   run:
+    #     working-directory: dhow-remotion
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Render MyComp
+        run: npm run build # = remotion render src/index.ts MyComp out/dhow.mp4 --codec=h264
+
+      - name: Upload video
+        uses: actions/upload-artifact@v4
+        with:
+          name: dhow-video
+          path: out/dhow.mp4 # kalau proyek di subfolder: dhow-remotion/out/dhow.mp4
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,22 @@
+{
+  "name": "dhow-voyage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Animasi 2D flat vector: kapal dhow Arab menuju pulau misterius di bawah langit tengah malam (Remotion).",
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "build": "remotion render src/index.ts MyComp out/dhow.mp4 --codec=h264",
+    "still": "remotion still src/index.ts MyComp out/frame-150.png --frame=150",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.528",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "4.0.528"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.6.0"
+  }
+}
